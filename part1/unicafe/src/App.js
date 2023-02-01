@@ -10,6 +10,14 @@ const Button = ( {handleClick, message} ) => {
   )
 }
 
+const StatisticsLine = ({ text, num }) => {
+  return (
+    <p>
+      {text} {num}
+    </p>
+  )
+}
+
 
 const Statistics = ({ good, neutral, bad, scores }) => {
 
@@ -23,17 +31,29 @@ const Statistics = ({ good, neutral, bad, scores }) => {
   let allScores = good + neutral + bad;
   let positivePercentage = good / allScores * 100;
 
-  return (
-    <>
-    <h2>Statistics</h2>
-      <h3>Good: {good}</h3>
-      <h3>Neutral: {neutral}</h3>
-      <h3>Bad: {bad}</h3>
-      <h3>All: {allScores}</h3>
-      <h3>Average: {average ? average : "Start pressing buttons to calculate average"}</h3>
-      <h3>Positive: {positivePercentage ? (positivePercentage + " %") : "Start pressing buttons to calculate percentage"}</h3>
-    </>
-  )
+  if (allScores === 0) {
+    return (
+      <>
+        <h2>Statistics</h2>
+        <h3>No feedback given</h3>
+      </>
+    )
+  } else {
+
+    return (
+      <>
+      <h2>Statistics</h2>
+        <StatisticsLine text="Good:" num={good} />
+        <StatisticsLine text="Neutral:" num={neutral} />
+        <StatisticsLine text="Bad:" num={bad} />
+        <StatisticsLine text="All:" num={allScores} />
+        <StatisticsLine text="Average:" num={average} />
+        <StatisticsLine text="Positive:" num={positivePercentage} />
+      </>
+    )
+  }
+
+ 
   
 }
 
