@@ -2,7 +2,7 @@ import App from '../App';
 
 
 const Note = ({note}) => {
-    return (
+  return (
       <li>{note.content}</li>
     )
 }
