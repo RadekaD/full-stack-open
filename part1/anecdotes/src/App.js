@@ -21,18 +21,35 @@ const App = () => {
     return Math.floor(Math.random() * arr.length)
   }
 
-  const [ selected, setSelected] = useState(0)
+  const [ selected, setSelected ] = useState(0)
+  const [ score, setScore ] = useState(new Array(anecdotes.length).fill(0))
 
-  const handleClick = () => {
+  console.log(score)
+
+  const handleRandomClick = () => {
     setSelected(getRandom(anecdotes))
 
   }
 
 
+  console.log(selected)
+
+  const handleVotesClick = () => {
+    const scoreCopy = [...score];
+    scoreCopy[selected] += 1;
+    setScore(scoreCopy)
+
+  }
+
+
+
+
   return (
     <>
       <h1>{anecdotes[selected]}</h1>
-      <button onClick={handleClick}>Get random anecdote</button>
+      <h4>This anecdote has {score[selected]} votes</h4>
+      <button onClick={handleRandomClick}>Get random anecdote</button>
+      <button onClick={handleVotesClick}>Vote for anecdote</button>
     </>
   );
 
