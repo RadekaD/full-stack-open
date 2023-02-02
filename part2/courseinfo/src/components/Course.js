@@ -46,12 +46,13 @@ const Header = ({name}) => {
   }
   
   const Total = ({ parts }) => {
-    let sum = 0;
+
+    console.log(parts);
+    let sum = parts.reduce((a, b) => a + b.exercises, 0)
+
     return (
       <>
-        {parts.map((part) => {
-            sum += part.exercises   
-        })}
+
         <p>
           Total number of exercises: {sum}
         </p>
