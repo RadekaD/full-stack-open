@@ -4,9 +4,13 @@ const Course = ({ course }) => {
 
     return (
         <div>
-            <Header name={course.name} />
-            <Content parts={course.parts}/>
-            <Total  parts={course.parts}/>
+            <h1>Web Developer Course</h1>
+            <Header name={course[0].name} />
+            <Content parts={course[0].parts}/>
+            <Total  parts={course[0].parts}/>
+            <Header name={course[1].name}/>
+            <Content parts={course[1].parts}/>
+            <Total parts={course[1].parts}/>
         </div>
         )
 }
@@ -17,7 +21,7 @@ const Header = ({name}) => {
     
     return (
       <>
-        <h1>{name}</h1>
+        <h2>{name}</h2>
       </>
     )
   }
@@ -47,7 +51,6 @@ const Header = ({name}) => {
   
   const Total = ({ parts }) => {
 
-    console.log(parts);
     let sum = parts.reduce((a, b) => a + b.exercises, 0)
 
     return (
