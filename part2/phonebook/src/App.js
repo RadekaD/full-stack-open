@@ -3,7 +3,7 @@ import { useState } from 'react'
 const App = () => {
 
   const [ persons, setPersons ] = useState([
-    { name: "Danilo Radeka", id: "danilo"}
+    { name: "Danilo Radeka", id: "danilo-radeka"}
   ])
 
 
@@ -14,13 +14,21 @@ const App = () => {
     e.preventDefault()
     const newPerson = {
       name: newName,
-      id: newName.split(" ")[0].toLowerCase()
-    }
+      id: newName.split(" ").join("-").toLowerCase()
+    } 
+     
 
-    console.log(newPerson.id)
-    setPersons(persons.concat(newPerson))
-    setNewName("")
-  }
+      let keys = persons.map(person => person.id)
+
+      if (keys.includes(newPerson.id)) {
+        alert(`${newName} was already added to the phonebook`)
+      } else {
+        setPersons(persons.concat(newPerson))
+        setNewName("")
+      }
+      
+
+    }
 
 
   const handleInput = (e) => {
