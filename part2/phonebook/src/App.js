@@ -1,18 +1,15 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import Search from './components/Search'
 
 const App = () => {
 
   const [ persons, setPersons ] = useState([
-    { name: "Danilo Radeka", id: "danilo-radeka", number: "063 289 7162"},
-    { name: "Milica Vuckovic", id: "milica-vuckovic", number: "063 289 7162"},
-    { name: "Bojana Vuckovic", id: "bojana-vuckovic", number: "063 289 7162"},
-    { name: "David Radeka", id: "david-radeka", number: "063 289 7162"},
-    { name: "Vesna Radeka", id: "vesna-radeka", number: "063 289 7162"},
-    { name: "Nenad Radeka", id: "nenad-radeka", number: "063 289 7162"},
+    { name: "Danilo Radeka", id: "danilo-radeka", number: "063 289 7162"}
   ])
   const [ newName, setNewName ] = useState("")
   const [ newNumber, setNewNumber ] = useState("")
   const [ filteredList, setFilteredList ] = useState(persons)
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -37,15 +34,36 @@ const App = () => {
 /// Search function
     const filterBySearch = (e) => {
       const query = e.target.value;
-      let updatedList = [...persons];
-      console.log(updatedList, query)
-      updatedList = updatedList.filter((item) => {
-        return item.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
-      })
+      
+      if (query !== "") {
+        let updatedList = [...persons];
+        updatedList = updatedList.filter((item) => {
+            return item.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+       })
+        setFilteredList(updatedList)
+      
+      } else {
+        setFilteredList(persons)
+      }
+     
+   }
 
-      setFilteredList(updatedList)
-    }
+   
+   
 
+   function output(mainList, filteredList) {
+	let inputValue = document.querySelector(".search")
+	if (inputValue === null) {
+		return mainList
+	} else {
+		return filteredList
+	}
+   }
+
+   let outputList = output(persons, filteredList)
+
+
+   
 
 /// Handles state of all input buttons
   const handleNameInput = (e) => {
@@ -58,10 +76,11 @@ const App = () => {
 
   return (
     <div>
-      <h2>Phonebook</h2>
-        <div>
-          search: <input onChange={filterBySearch}  />
-        </div>
+      <h1>Phonebook</h1>
+        
+        <Search filter={filterBySearch}/>
+
+
         <h2>Add new</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -75,10 +94,10 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      <div className='content'>
-        {filteredList.map((person) => <p key={person.id}>{person.name} {person.number}</p>)}
-        
+      <div>
+        {filteredList.map((person) => <p key={person.id}>{person.name} {person.number} </p>)}
       </div>
+
       
     </div>
     
