@@ -1,14 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import Search from './components/Search'
 
 const App = () => {
 
-  const [ persons, setPersons ] = useState([
-    { name: "Danilo Radeka", id: "danilo-radeka", number: "063 289 7162"}
-  ])
+  const [ persons, setPersons ] = useState([])
   const [ newName, setNewName ] = useState("")
   const [ newNumber, setNewNumber ] = useState("")
   const [ filteredList, setFilteredList ] = useState(persons)
+
+  const hook = () => {
+    axios
+    .get("http://localhost:3001/persons")
+    .then(response => {
+      setPersons(response.data)
+    })
+  }
+
+  useEffect(hook, [])
 
 
   const handleSubmit = (e) => {
@@ -49,18 +58,6 @@ const App = () => {
    }
 
    
-   
-
-   function output(mainList, filteredList) {
-	let inputValue = document.querySelector(".search")
-	if (inputValue === null) {
-		return mainList
-	} else {
-		return filteredList
-	}
-   }
-
-   let outputList = output(persons, filteredList)
 
 
    
@@ -95,7 +92,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       <div>
-        {filteredList.map((person) => <p key={person.id}>{person.name} {person.number} </p>)}
+        {persons.map((person) => <p key={person.id}>{person.name} {person.number} </p>)}
       </div>
 
       
