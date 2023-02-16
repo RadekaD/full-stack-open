@@ -1,11 +1,6 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "040-123456",
-      "id": 1
-    },
-    {
       "name": "Ada Lovelace",
       "number": "39-44-5323523",
       "id": 2
@@ -29,16 +24,6 @@
       "name": "Milica Vuckovic",
       "number": "123 542 123 1",
       "id": 6
-    },
-    {
-      "name": "Bleja Blejic",
-      "number": "223-452-1232",
-      "id": 7
-    },
-    {
-      "name": "Srba Srbic",
-      "number": "123-455-31123",
-      "id": 8
     }
   ]
 }
