@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Search from './components/Search'
+import PersonForm from './components/PersonForm';
+import PersonsList from './components/PersonsList';
 
 const App = () => {
 
@@ -19,12 +21,10 @@ const App = () => {
 
   useEffect(hook, [])
 
-
   const handleSubmit = (e) => {
     e.preventDefault()
     const newPerson = {
       name: newName,
-      id: newName.split(" ").join("-").toLowerCase(),
       number: newNumber
     } 
      
@@ -57,10 +57,6 @@ const App = () => {
      
    }
 
-   
-
-
-   
 
 /// Handles state of all input buttons
   const handleNameInput = (e) => {
@@ -78,23 +74,15 @@ const App = () => {
         <Search filter={filterBySearch}/>
 
 
-        <h2>Add new</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          name: <input value={newName} onChange={handleNameInput}/>
-        </div>
-        <div>
-          number: <input value ={newNumber} onChange={handleNumberInput}/>
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      <div>
-        {persons.map((person) => <p key={person.id}>{person.name} {person.number} </p>)}
-      </div>
+      <h2>Add new</h2>
 
+        <PersonForm submit={handleSubmit} name={newName} number={newNumber} nameHandle={handleNameInput} numberHandle={handleNumberInput}/>
+
+        
+
+      <h2>Contacts</h2>
+ 
+        <PersonsList persons={persons}/>
       
     </div>
     

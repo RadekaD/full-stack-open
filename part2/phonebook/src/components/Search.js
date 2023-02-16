@@ -1,13 +1,13 @@
 import App from '../App';
 
 
-const Search = (props) => {
+const Search = ({ filter }) => {
     
     
     return (
         <>
             <h2>Filter:</h2>
-            <input onChange={props.filter} className={"search"} />
+            <input onChange={filter} className={"search"} />
         </>
     )
 }
