@@ -26,7 +26,13 @@ const App = () => {
     const newPerson = {
       name: newName,
       number: newNumber
-    } 
+    }
+    
+    axios
+      .post("http://localhost:3001/persons", newPerson)
+      .then(response => {
+        console.log(response)
+      })
      
 /// Blocks ability to add already existing names by comparing id
       let keys = persons.map(person => person.id)
