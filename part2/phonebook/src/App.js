@@ -3,6 +3,8 @@ import axios from 'axios';
 import Search from './components/Search'
 import PersonForm from './components/PersonForm';
 import PersonsList from './components/PersonsList';
+import personService from './services/backend';
+
 
 const App = () => {
 
@@ -12,11 +14,11 @@ const App = () => {
   const [ filteredList, setFilteredList ] = useState(persons)
 
   const hook = () => {
-    axios
-    .get("http://localhost:3001/persons")
-    .then(response => {
-      setPersons(response.data)
-    })
+    personService
+      .getAll()
+      .then(initialPersonList => {
+        setPersons(initialPersonList)
+      })
   }
 
   useEffect(hook, [])
@@ -28,10 +30,11 @@ const App = () => {
       number: newNumber
     }
     
-    axios
-      .post("http://localhost:3001/persons", newPerson)
-      .then(response => {
-        console.log(response)
+    personService
+      .create(newPerson)
+      .then(returnedPerson => {
+        setPersons(persons.concat(returnedPerson))
+        
       })
      
 /// Blocks ability to add already existing names by comparing id

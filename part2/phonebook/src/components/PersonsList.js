@@ -3,7 +3,7 @@ import App from '../App';
 const Person = ({ person }) => {
     
     return (
-        <p>{person.name} {person.number}</p>
+        <p key={person.id}>{person.name} {person.number}</p>
     )
 }
 
