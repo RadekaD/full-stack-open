@@ -3,6 +3,7 @@ import axios from 'axios';
 import Search from './components/Search'
 import PersonForm from './components/PersonForm';
 import PersonsList from './components/PersonsList';
+import Notification from './components/Notification';
 import personService from './services/backend';
 
 
@@ -12,6 +13,7 @@ const App = () => {
   const [ newName, setNewName ] = useState("")
   const [ newNumber, setNewNumber ] = useState("")
   const [ filteredList, setFilteredList ] = useState(persons)
+  const [ message, setMessage ] = useState(null)
 
   const hook = () => {
     personService
@@ -39,8 +41,13 @@ const App = () => {
         .create(newPerson)
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
-          
         })
+        setMessage(`Added ${newPerson.name}`)
+
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
+
     } else {  
 
        /// Update number
@@ -53,7 +60,14 @@ const App = () => {
               person.id !== returnedPerson.id ? person : returnedPerson
             );
             setPersons(updatedPersons);
+            
           })
+
+          setMessage(`Updated ${currentName[0].name}'s phone number`)
+
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000)
         }
 
      }
@@ -103,6 +117,9 @@ const App = () => {
 
   return (
     <div>
+
+        <Notification message={message} />
+
       <h1>Phonebook</h1>
         
         <Search filter={filterBySearch}/>

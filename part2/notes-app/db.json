@@ -3,12 +3,12 @@
     {
       "id": 1,
       "content": "HTML is easy",
-      "important": false
+      "important": true
     },
     {
       "id": 2,
       "content": "Browser can execute only JavaScript",
-      "important": false
+      "important": true
     },
     {
       "id": 3,
@@ -17,7 +17,7 @@
     },
     {
       "content": "Danilo",
-      "important": true,
+      "important": false,
       "id": 4
     },
     {
@@ -42,7 +42,7 @@
     },
     {
       "content": "Car",
-      "important": false,
+      "important": true,
       "id": 9
     }
   ]
