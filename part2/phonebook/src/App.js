@@ -62,6 +62,12 @@ const App = () => {
             setPersons(updatedPersons);
             
           })
+          .catch(error => {
+            setMessage(`Update failed: ${newPerson.name} has already been removed`)
+          })
+
+
+      
 
           setMessage(`Updated ${currentName[0].name}'s phone number`)
 
