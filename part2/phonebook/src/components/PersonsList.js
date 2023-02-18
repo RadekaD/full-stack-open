@@ -8,7 +8,7 @@ const Person = ({ person, handleDelete }) => {
             <button onClick={() => handleDelete(person.id, person.name)}>Delete</button>
         </div>
         
-        //The DIV should get an ID, not the button
+        
         
     )
 }

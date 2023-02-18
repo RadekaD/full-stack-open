@@ -29,25 +29,37 @@ const App = () => {
       name: newName,
       number: newNumber
     }
-    
-    personService
-      .create(newPerson)
-      .then(returnedPerson => {
-        setPersons(persons.concat(returnedPerson))
-        
-      })
-     
-/// Blocks ability to add already existing names by comparing id
-      let keys = persons.map(person => person.id)
-      if (keys.includes(newPerson.id)) {
-        alert(`${newName} was already added to the phonebook`)
-      } else {
-        setPersons(persons.concat(newPerson))
-        setNewName("")
-        setNewNumber("")
-      }
-    }
 
+    const currentName = persons.filter(
+      (person) => person.name === newPerson.name
+    )
+
+    if (currentName.length === 0) {
+      personService
+        .create(newPerson)
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson))
+          
+        })
+    } else {  
+
+       /// Update number
+      if (window.confirm(`${newPerson.name} is already added to the phonebook, replace old number with new one?`)) {
+        console.log(currentName);
+        personService
+          .update(currentName[0].id, newPerson)
+          .then((returnedPerson) => {
+            const updatedPersons = persons.map((person) => 
+              person.id !== returnedPerson.id ? person : returnedPerson
+            );
+            setPersons(updatedPersons);
+          })
+        }
+
+     }
+     setNewName("")
+     setNewNumber("")
+  }
     
 /// Search function
     const filterBySearch = (e) => {
@@ -83,9 +95,11 @@ const App = () => {
         const updatedPersons = persons.filter((person) => person.id !== id)
         setPersons(updatedPersons)
       })
-    }
-    
+    } 
   }
+
+
+  
 
   return (
     <div>

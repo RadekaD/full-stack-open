@@ -3,7 +3,7 @@
     {
       "id": 1,
       "content": "HTML is easy",
-      "important": true
+      "important": false
     },
     {
       "id": 2,
@@ -22,17 +22,17 @@
     },
     {
       "content": "Milica",
-      "important": true,
+      "important": false,
       "id": 5
     },
     {
       "content": "Vuckovic",
-      "important": true,
+      "important": false,
       "id": 6
     },
     {
       "content": "Radeka",
-      "important": true,
+      "important": false,
       "id": 7
     },
     {
